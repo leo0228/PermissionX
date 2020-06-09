@@ -34,3 +34,24 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+
+//发布到jcenter仓库
+apply plugin: 'com.novoda.bintray-release'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.9.1'
+    }
+}
+publish {
+    userOrg = 'tianjiaodev'                             //bintray用户名
+    groupId = 'com.permissionx.tianjiaodev'             //组织的唯一标识
+    artifactId = 'permissionx'                          //工程唯一标识
+    publishVersion = '1.0.0'                            //版本号
+    desc = 'Make Android runtime permission request easy'
+    website = 'https://github.com/leo0228/PermissionX.git'
+}
+
