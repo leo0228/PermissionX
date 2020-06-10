@@ -63,13 +63,14 @@ class InvisibleFragment : Fragment() {
     private fun showTipDialog() {
         val builder = activity?.let { AlertDialog.Builder(it) }
         builder.let {
-            it?.setTitle("提示")
-            it?.setMessage("如需开启相关功能，必须授权，\n请前去设置")
-            it?.setPositiveButton("去设置") { dialog, _ ->
+            it?.setTitle("Tips")
+            it?.setMessage("Authorization is required to enable the functionality.\n" +
+                    "Please go ahead and set up.")
+            it?.setPositiveButton("Go") { dialog, _ ->
                 dialog.dismiss()
                 settingToActivity()
             }
-            it?.setNegativeButton("") { dialog, _ ->
+            it?.setNegativeButton("Close") { dialog, _ ->
                 dialog.dismiss()
                 activity?.finish()
                 exitProcess(0)

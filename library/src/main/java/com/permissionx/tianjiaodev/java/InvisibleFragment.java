@@ -74,17 +74,17 @@ public class InvisibleFragment extends Fragment {
 
     private void showTipDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setTitle("提示");
+        builder.setTitle("Tips");
 
-        builder.setMessage("如需开启相关功能，必须授权，\n请前去设置");
-        builder.setPositiveButton("去设置", new DialogInterface.OnClickListener() {
+        builder.setMessage("Authorization is required to enable the functionality.\nPlease go ahead and set up.");
+        builder.setPositiveButton("Go", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 settingToActivity();
             }
         });
-        builder.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
