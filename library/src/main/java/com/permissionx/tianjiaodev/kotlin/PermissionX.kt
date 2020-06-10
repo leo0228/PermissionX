@@ -1,4 +1,4 @@
-package com.permissionx.tianjiaodev
+package com.permissionx.tianjiaodev.kotlin
 
 
 import androidx.fragment.app.FragmentActivity
@@ -7,9 +7,12 @@ object PermissionX {
 
     private const val TAG = "InvisibleFragment"
 
+    /**
+     * permissions: Map<String, Boolean>   String表示要申请的权限，Boolean表示对应权限是否必须
+     */
     fun request(
         activity: FragmentActivity,
-        vararg permissions: String,
+        permissions: Map<String, Boolean>,
         callback: PermissionCallback
     ) {
         val fragmentManager = activity.supportFragmentManager
@@ -21,6 +24,6 @@ object PermissionX {
             fragmentManager.beginTransaction().add(invisibleFragment, TAG).commitNow()
             invisibleFragment
         }
-        fragment.requestNow(callback, *permissions)
+        fragment.requestNow(callback, permissions)
     }
 }

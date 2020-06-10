@@ -14,13 +14,41 @@ dependencies {
 然后就可以使用如下语法结构来申请运行时权限了：
 
 ```kotlin
-PermissionX.request(this,
-                Manifest.permission.CALL_PHONE,
-                Manifest.permission.READ_CONTACTS) { allGranted, deniedList ->
+
+val permissions: MutableMap<String, Boolean> = HashMap()
+permissions[Manifest.permission.CAMERA] = true
+permissions[Manifest.permission.CALL_PHONE] = true
+permissions[Manifest.permission.WRITE_EXTERNAL_STORAGE] = false
+
+PermissionX.request(
+    this,
+    permissions
+) { allGranted, deniedList ->
     if (allGranted) {
-        Toast.makeText(this, "All permissions are granted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(MainJavaActivity.this, "全部授权", Toast.LENGTH_SHORT).show();
     } else {
-        Toast.makeText(this, "You denied $deniedList", Toast.LENGTH_SHORT).show()
+        Toast.makeText(MainJavaActivity.this, "未授权：" + deniedList.toString(), Toast.LENGTH_SHORT).show();
     }
 }
+
+```
+
+```java
+
+Map<String, Boolean> permissions = new HashMap<>();
+permissions.put(Manifest.permission.CAMERA, true);
+permissions.put(Manifest.permission.CALL_PHONE, true);
+permissions.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, false);
+
+PermissionX.init(MainJavaActivity.this, permissions, new IInvisibleListener() {
+    @Override
+    public void onGrant(boolean allGranted, List<String> deniedList) {
+        if (allGranted) {
+            Toast.makeText(MainJavaActivity.this, "全部授权", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainJavaActivity.this, "未授权：" + deniedList.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+});
+
 ```
